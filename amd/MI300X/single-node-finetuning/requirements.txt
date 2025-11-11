@@ -1,8 +1,0 @@
-psutil
-torch
-datasets
-transformers
-trl
-peft
-mlflow
-accelerate

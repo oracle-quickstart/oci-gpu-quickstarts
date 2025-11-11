@@ -1,0 +1,119 @@
+---
+# Ansible playbook to configure Ubuntu image with GPU drivers and tools
+# This playbook installs NVIDIA drivers, CUDA toolkit, and other GPU-related tools
+
+- name: Configure Ubuntu GPU Image
+  hosts: all
+  become: true
+  gather_facts: yes
+
+  vars:
+    cuda_version: "12.2.0"
+    nvidia_driver_version: "535"
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Install basic dependencies
+      apt:
+        name:
+          - curl
+          - wget
+          - gnupg
+          - lsb-release
+          - software-properties-common
+          - build-essential
+          - dkms
+          - linux-headers-generic
+        state: present
+
+    - name: Add NVIDIA package repositories
+      shell: |
+        distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+        curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg
+        curl -s -L https://nvidia.github.io/libnvidia-container/$distribution/libnvidia-container.list | \
+          sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+          tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+      args:
+        creates: /etc/apt/sources.list.d/nvidia-container-toolkit.list
+
+    - name: Update apt cache after adding NVIDIA repos
+      apt:
+        update_cache: yes
+
+    - name: Install NVIDIA Container Toolkit
+      apt:
+        name:
+          - nvidia-container-toolkit
+        state: present
+
+    - name: Configure NVIDIA Container Toolkit
+      shell: nvidia-ctk runtime configure --runtime=docker
+      args:
+        creates: /etc/docker/daemon.json
+
+    - name: Install CUDA toolkit (via NVIDIA repository)
+      shell: |
+        wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.1-1_all.deb
+        dpkg -i cuda-keyring_1.1-1_all.deb
+        apt-get update
+        apt-get -y install cuda-toolkit-12-2
+      args:
+        creates: /usr/local/cuda-12.2
+
+    - name: Set up CUDA environment variables
+      lineinfile:
+        path: /etc/environment
+        line: "{{ item }}"
+        create: yes
+      loop:
+        - "CUDA_HOME=/usr/local/cuda"
+        - "PATH=/usr/local/cuda/bin:$PATH"
+        - "LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
+
+    - name: Create CUDA symlink
+      file:
+        src: /usr/local/cuda-12.2
+        dest: /usr/local/cuda
+        state: link
+
+    - name: Install Python packages for GPU computing
+      pip:
+        name:
+          - numpy
+          - cupy-cuda12x
+        state: present
+        executable: pip3
+
+    - name: Install common ML/AI tools
+      apt:
+        name:
+          - python3-pip
+          - python3-dev
+          - git
+        state: present
+
+    - name: Clean up apt cache
+      shell: apt-get clean && rm -rf /var/lib/apt/lists/*
+
+    - name: Remove temporary files
+      file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - /tmp/cuda-keyring_*.deb
+        - /root/.cache
+
+    - name: Display installed CUDA version
+      command: /usr/local/cuda/bin/nvcc --version
+      register: cuda_version_output
+      changed_when: false
+      failed_when: false
+
+    - name: Print CUDA version
+      debug:
+        msg: "{{ cuda_version_output.stdout }}"
+
