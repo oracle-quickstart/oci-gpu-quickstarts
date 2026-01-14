@@ -13,7 +13,7 @@ This document provides hardware specifications, supported OS images, onboarding 
 
 ## Onboarding
 
-All details ro help you get started with NVIDIA B200 OCI Bare-Metal GPUs.
+All details to help you get started with NVIDIA B200 OCI Bare-Metal GPUs.
 
 ### Hardware Specifications
 
