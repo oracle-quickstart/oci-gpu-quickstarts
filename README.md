@@ -1,27 +1,36 @@
-# OCI AMD MI300X Onboarding Helper Repository
+# Oracle Cloud Infrastructure (OCI) GPU Onboarding Content
+This repository hosts onboarding content for Oracle Cloud Infrastructure GPU offerings. It is organized by GPU family, with each folder providing:
 
-This repo has details how to get started with AMD MI300X Instinct GPUs with OCI.
-
-## MI300X Specification & Starter Guide
-
-This is a easy deployment and seecification documeny(/onboarding/mi300x-oci-onboarding.md) :
-You can easily deloy your first MI300X instances by clicking on the button below
-[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?region=home&zipUrl=https://github.com/oracle-quickstart/oci-quickstart-template/archive/master.zip)
-
-After logging into the console you'll be taken through the same steps described
-in the [Deploy](#deploy) section below.
+1. A snapshot of each GPU hardware configuration 
+2. A quick-start guide to provision GPU resources on OCI
+3. A “Hello World” sample to verify compute and driver/toolchain readiness
+4. Links to approved OS images and drivers
+5. Guidance for running on Oracle Kubernetes Engine (OKE)
+6. Basic and advanced health and issue diagnosis tools
+7. A link to blogs and partner content covering advanced configurations, specifications
 
 
-Note, if you use this template to create another repo you'll need to change the link for the button to point at your repo.
+## Repository Structure
 
-## Try Before Buy (TBB)
-
-OCI can help assign a test MI300X baremetal node if you are intersted in benchmakring & trying out the ROCm based applications. Please sign up here [Oracle.com/amd-gpus ](http://oracle.com/amd-gpus )
-
-### ROCm Samples
+```
+/nvidia
+    /B200
+        [README-B200.MD](/nvidia/B200/README-B200.md)
+    /GB200
+        [README-GB200.MD](/nvidia/GB200/README-GB200.md)
+/amd
+    /MI300X
+        [README-MI300X.MD]
+    /MI355X
+        [README-MI355X.MD]
+        /k8s
+            [EXAMPLE YAMLS]
+```
+Helper scripts for driver checks, GPU validation, and log collection
+You can add additional GPU families as OCI expands offerings.
 
 ### Questions
-Reach out to sales@oracle.com 
+Reach out to oci-gpu-quickstart-help@oracle.com 
 
 ## Contributing
 
@@ -33,7 +42,7 @@ Please consult the [security guide](./SECURITY.md) for our responsible security 
 
 ## License
 
-Copyright (c) 2023 Oracle and/or its affiliates.
+Copyright (c) 2024 Oracle and/or its affiliates.
 
 Released under the Universal Permissive License v1.0 as shown at
 <https://oss.oracle.com/licenses/upl/>.

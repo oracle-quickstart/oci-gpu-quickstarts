@@ -1,0 +1,114 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: headless-svc
+spec:
+  clusterIP: None
+  ports:
+  - port: 29400
+    protocol: TCP
+    targetPort: 29400
+  selector:
+    job-name: mpt30b-job
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mpt30b-gpu-config
+data:
+  headless_svc: headless-svc
+  job_name: mpt30b-job
+  master_addr: mpt30b-job-0.headless-svc
+  master_port: '29400'
+  num_replicas: '2'
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: mpt30b-job
+spec:
+  backoffLimit: 0
+  completionMode: Indexed
+  completions: 2
+  parallelism: 2
+  template:
+    metadata:
+      labels:
+        job: mpt30-k8-job
+    spec:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      volumes:
+      - { name: devinf, hostPath: { path: /dev/infiniband }}
+      - { name: shm, emptyDir: { medium: Memory, sizeLimit: 32Gi }}
+      containers:
+        - name: mpt30b-gpu-container
+          image: corescientificai/private_300x_benchmarks:rocm-6.1.3_training_llm-foundry-0.7.0_mpt30b_rcclupdate00cd4dae1e9
+          securityContext:
+            privileged: true
+            capabilities:
+              add: [ "IPC_LOCK" ]
+          volumeMounts:
+            - { mountPath: /dev/infiniband, name: devinf }
+            - { mountPath: /dev/shm, name: shm }
+          workingDir: /app/llm-foundry/scripts/train/
+          env:
+          - name: NCCL_DEBUG
+            value: "INFO"
+          - name: NCCL_DEBUG_SUBSYS
+            value: "WARN"
+          - name: PYTHONFAULTHANDLER
+            value: "1"
+          - name: NCCL_SOCKET_IFNAME
+            value: "eth0"
+          - name: HIP_VISIBLE_DEVICES
+            value: "0,1,2,3,4,5,6,7" # # 0,1,2,...,n for running on GPU and select the GPUs, -1 for running on CPU
+          - name: HIP_FORCE_DEV_KERNARG
+            value: "1"
+          - name: GPU_MAX_HW_QUEUES
+            value: "2"
+          - name: USE_ROCMLINEAR
+            value: "1"
+          - name: WORLD_SIZE
+            value: "16"
+          - name: LOCAL_WORLD_SIZE
+            value: "8"
+          - name: MASTER_ADDR
+            valueFrom:
+              configMapKeyRef:
+                key: master_addr
+                name: mpt30b-gpu-config
+          - name: MASTER_PORT
+            valueFrom:
+              configMapKeyRef:
+                key: master_port
+                name: mpt30b-gpu-config
+          - name: HEADLESS_SVC
+            valueFrom:
+              configMapKeyRef:
+                key: headless_svc
+                name: mpt30b-gpu-config
+          - name: JOB_NAME
+            valueFrom:
+              configMapKeyRef:
+                key: job_name
+                name: mpt30b-gpu-config
+          - name: NNODES
+            valueFrom:
+              configMapKeyRef:
+                key: num_replicas
+                name: mpt30b-gpu-config
+          - name: NODE_RANK
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.annotations['batch.kubernetes.io/job-completion-index']
+          command: ["/bin/bash", "-c", "--"]
+          args: ["composer train.py  yamls/finetune/mpt-30b-instruct.yaml  global_train_batch_size=1024  device_train_microbatch_size=8   max_seq_len=8192   precision=amp_fp16   max_duration=1ep  eval_interval=1ep 2>&1 | tee log_mpt30b.txt;"]
+          resources:
+            limits:
+              amd.com/gpu: 8 # requesting a GPU
+      imagePullSecrets:
+      - name: regcred
+      restartPolicy: Never
+      subdomain: headless-svc

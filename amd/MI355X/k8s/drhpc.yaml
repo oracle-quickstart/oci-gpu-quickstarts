@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: oci-drhpc
+spec:
+  containers:
+  - image: iad.ocir.io/iduyx1qnmway/lens-metric-collector/oci-dr-hpc-v2:rocm-1.0.24
+    name: oci-drhpc
+    command: ["/bin/bash"]
+    args: ["-c","oci-dr-hpc-v2 health-checks"]
+    resources:
+      limits:
+        amd.com/gpu: 8
+      requests:
+        amd.com/gpu: 8
+    securityContext:
+      allowPrivilegeEscalation: false
+  restartPolicy: Never
