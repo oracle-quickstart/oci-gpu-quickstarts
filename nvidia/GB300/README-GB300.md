@@ -526,6 +526,10 @@ NCCL version 2.28.7+cuda13.0
 Here you can find suggested troubleshooting methods.
 
 * [nvidia-smi](#nvidia-smi)
+* [numactl](#numactl)
+* [RDMA Link](#rdma-link)
+* [IB Write BW](#ib-write-bw)
+* [IB Write Lat](#ib-write-lat)
 * [gpu-fryer](#gpu-fryer)
 * [nvbandwidth](#nvbandwidth)
 * [Babel Stream](#babel-stream)
@@ -586,7 +590,7 @@ ubuntu@GPU-6773:~$ nvidia-smi -q | grep -i "vbios version"
     VBIOS Version                         : 97.10.4A.00.05
 ```
 
-## numcatl
+## numactl
 
 Shows the information about the number of cores and numa domains For the
 GB300 you should see something like\
