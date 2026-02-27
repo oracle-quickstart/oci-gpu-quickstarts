@@ -22,14 +22,6 @@ Linux system level actions [need to be considered](#further-reading--support). 
 * [Further Reading & Support](#further-reading--support)
 
 # Hardware Specifications
-<!-- Old format 
-• 2 NVIDIA Grace ARM (72 Arm Neoverse V2 cores)\
-• 2.1TB DDR5 SDRAM\
-• 4 NVIDIA B300 288GB GPUs\
-• 8 400Gb/s ConnectX-8 (3.2Tb/s total bandwidth, ROCe RDMA) \
-• 2 200Gb/s BF3 (Frontend connection) \
-• 4 NVMe Disks (7TB/disk -- 28TB total)
--->
 
 | Shape Name        | GPU Model     | GPUs/Node | GPU Memory (GB/GPU) | GPU Memory Total (GB) | CPU | # of CPUs | System Memory (GB) | Local Storage | Host NIC | RDMA (ROCe) NICs |
 |-------------------|---------------|-----------|------------|----------------- |---------------------------|-----------|---------------|----------------|----------|-----------|
@@ -415,7 +407,7 @@ NCCL version 2.28.7+cuda13.0
 | pretrain_qwen3_30b_a3b | 64 | fp8 | 9170.630 | 226.823 | 657.96 | 15.31 | 
 
 # OKE GPU Getting Started
-*needs_content*
+Information on getting up and running on OKE can be found [here](https://github.com/oracle-quickstart/oci-hpc-oke).
 
 # Troubleshooting
 
@@ -965,10 +957,6 @@ As of version 4.2, these are the available testing details
 
 ![DCGMI](media/dcgmi.png)
 
-<!-- For more information on common issues and recommended actions, please
-see the separate "BM.GPU.H100.8 and \
-BM.GPU.H200.8 Recommended Health Checks" document -->
-
 # Further Reading & Support
 
 *   [GB300 Specific Deployment and Management Notes](#gb300-specific-deployment-and-management-notes)
@@ -990,7 +978,7 @@ Below you will find specific information related to the GB300 shape.
 A GPU Memory Fabric OCID is a customer identifier in a capacity topology
 that groups the hosts connected to a single NVLink 72 switch (AKA a
 single rack, or single physical NVLink domain).  It takes the form
-\"ocid1.computegpumemoryfabric.oc1\...\"
+"ocid1.computegpumemoryfabric.oc1..."
 
 ### GPU Memory Cluster (GMC)
 
@@ -1145,7 +1133,3 @@ Nvidia IMEX configures the hosts in a single rack to be able to communicate over
 #### Unhealthy Resource Tagging
 
 Unhealthy instance tagging is supported for GB300 instances.
-
-<!-- This should be end of doc -->
-
-
