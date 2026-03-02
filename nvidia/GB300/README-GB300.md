@@ -146,7 +146,7 @@ mpirun --bind-to numa
         * [NCCL All to All Scale Performance 16 Hosts 1 Rack](#nccl-all-to-all-scale-performance16-hosts-1-rack)
         * [NCCL All to All Scale Performance 32 Hosts 2 Racks](#nccl-all-to-all-scale-performance-32-hosts-2-racks)
         * [NCCL All Reduce Scale Performance Single Node](#nccl-all-to-all-single-node)
-* [Model Inference Performance]
+* [Model Inference Performance](#model-inference-performance)
 
 ### NCCL All Reduce
 
