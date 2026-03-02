@@ -50,7 +50,8 @@ To build your images using packer clone the OCI HPC Images repo and run the comm
 
 | OS Version        | Image Packer Build Details       | OCI Platform Image Link                                                                        | Driver Versions | Build & Dependency Status | 
 |-------------------|-------------------------------|------------------------------------------------------------------------------------------------------------|--------------|--------------------------|
-*To Be Added*
+| OCI GPU AI Image with Ubuntu Linux 22.04 | Ubuntu-22/Canonical-Ubuntu-22.04-aarch64-DOCA-OFED-3.2.1-580-OPEN-CUDA-13.0| [PAR Link](https://objectstorage.ca-montreal-1.oraclecloud.com/p/S2Qey_Y3D2rQJuHO1YKPvC5uglZIJBwFfshFqpT0UF327VX9MZzDnLrHKWqUQzzB/n/idxzjcdglx2s/b/images/o/Canonical-Ubuntu-22.04-aarch64-2025.10.31-0-DOCA-OFED-3.2.1-GPU-580-OPEN-CUDA-13.0-2026.02.27-0) | NVIDIA OPEN 580, DOCA OFED 3.2.1, CUDA 13, OCA 1.56, HPC-X 2.25.1 | ![Build](/media/icons/build-passing.svg) ![Build](/media/icons/dependencies.svg) 
+| OCI GPU AI Image with Ubuntu Linux 24.04 |  Ubuntu-24/Canonical-Ubuntu-24.04-aarch64-DOCA-OFED-3.2.1-580-OPEN-CUDA-13.0 | [PAR Link](https://objectstorage.ca-montreal-1.oraclecloud.com/p/S2Qey_Y3D2rQJuHO1YKPvC5uglZIJBwFfshFqpT0UF327VX9MZzDnLrHKWqUQzzB/n/idxzjcdglx2s/b/images/o/Canonical-Ubuntu-24.04-aarch64-2025.10.31-0-DOCA-OFED-3.2.1-GPU-580-OPEN-CUDA-13.0-2026.02.27-0) |  NVIDIA OPEN 580, DOCA OFED 3.2.1, CUDA 13, OCA 1.56, HPC-X 2.25.1 | ![Build](/media/icons/build-passing.svg) ![Build](/media/icons/dependencies.svg) 
 
 ## Hello World Verification
 This series of commands can be used to verify image compatability and basic GPU functionality.  SSH into the GPU host and execute:
