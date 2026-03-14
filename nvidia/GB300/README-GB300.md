@@ -146,7 +146,7 @@ mpirun --bind-to numa
         * [NCCL All to All Scale Performance 16 Hosts 1 Rack](#nccl-all-to-all-scale-performance16-hosts-1-rack)
         * [NCCL All to All Scale Performance 32 Hosts 2 Racks](#nccl-all-to-all-scale-performance-32-hosts-2-racks)
         * [NCCL All Reduce Scale Performance Single Node](#nccl-all-to-all-single-node)
-* [Model Inference Performance]
+* [Model Inference Performance](#model-inference-performance)
 
 ### NCCL All Reduce
 
@@ -421,8 +421,9 @@ Here you can find suggested troubleshooting methods.
 * [IB Write Lat](#ib-write-lat)
 * [gpu-fryer](#gpu-fryer)
 * [nvbandwidth](#nvbandwidth)
-* [Babel Stream](#babel-stream)
 * [DCGMI](#dcgmi)
+<!-- Removed non-functional * [Babel Stream](#babel-stream) -->
+
 
 ## nvidia-smi
 
@@ -924,6 +925,7 @@ SUM device_to_device_latency_sm 20525.53
 SUM device_local_copy 13249.68
 ```
 
+<!-- This is currently not working on CUDA 13
 ## Babel Stream
 
 BabelStream is a synthetic benchmark based on the STREAM benchmark for
@@ -935,17 +937,16 @@ models (e.g., CUDA, HIP, SYCL, \
 OpenMP), enabling cross-platform and cross-model comparisons of
 achievable memory bandwidth.
 
-    git clone <https://github.com/UoB-HPC/BabelStream.git>
+    git clone <https://github.com/UoB-HPC/BabelStream.git
     cd BabelStream
     mkdir build
-    cmake -B build -DMODEL=cuda -DCMAKE\_CUDA\_COMPILER=/usr/local/cuda-12.8/bin/nvcc \
-    -DCUDA_ARCH=sm_100
+    cmake -B build -DMODEL=cuda -DCMAKE_CUDA_COMPILER=/usr/local/cuda-13/bin/nvcc -DCUDA_ARCH=sm_100
     cd build
     make
     ./cuda-stream
 
 ![Babel Stream](media/babel-stream.png)
-
+-->
 ## DCGMI
 
 This command can be used to identify GPU issues. It has multiple levels
@@ -1078,7 +1079,7 @@ can be used to deploy GB300 hosts on multiple GMFs. 
 Please see the readme associated with the version of
 the stack you are using for details.
 
-From the oci CLI, here is what is necessary to deploy GB300 hosts.  When
+From the OCI CLI, here is what is necessary to deploy GB300 hosts.  When
 you create the GMC, OCI will attempt to instantiate \<size\> hosts, no
 additional instance launch command is needed.
 
