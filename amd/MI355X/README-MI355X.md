@@ -7,37 +7,19 @@ MI355X shapes represent a specialized class of heterogeneous accelerated compute
 MI355X systems leverage AMD’s XGMI (Inter-GPU Express Global Memory Interconnect) for direct GPU-to-GPU connectivity within each node. On a typical MI355X system, all 8 GPUs are fully connected via XGMI, providing a single-hop, high-bandwidth, low-latency peer-to-peer path between any pair of GPUs. This topology is symmetrical, meaning all GPUs enjoy equal connectivity for workloads that depend on frequent collective or point-to-point 
 communication.
 
-<!-- 
-## Table of Contents
-* [Onboarding](#onboarding)
-  * [Hardware Specifications](#hardware-specifications)
-  * [Supported OS Images](#supported-os-images)
-* [Getting Started & Validations](#getting-started--validations)
-  * [Bare-metal node validations](#bare-metal-node-validations)
-  * [Container based validations](#container-based-validations)
-    * [Hello World ROCm PyTorch Container](#hello-world-rocm-pytorch-container)
-  * [Kubernetes based validations](#kubernetes-based-validations)
-* [Performance](#performance)
-  * [RCCL Benchmarks](#rccl-benchmarks)
-  * [LLM Inference Performance Numbers](#llm-lnference-performance-numbers)
-* [Healthcheck](#health-checks)
-* [Troubleshooting](#troubleshooting)
-* [Further Reading & Support](#further-reading--support)
-
--->
 # Table of Contents
 
-* [Hardware Specifications](hardware-specifications)
+* [Hardware Specifications](#hardware-specifications)
 * [Recommended Operating Systems](#recommended-operating-systems)
     * [Recommended Software Version](#recommended-software-version)
-    * [Custom OS Image Creation with Packer](custom-os-image-creation-with-packer)
-    * [Provided Images](provided-images)
-* [Hello World Verification](hello-world-verification)
-* [Performance Benchmarks](performance-benchmarks)
-    * [RCCL & Model Inference Performance](rccl--model-inference-performance)
-* [OKE GPU Getting Started](oke-gpu-getting-started)
-* [Troubleshooting](Troubleshooting)
-* [Further Reading & Support](further-reading--support)
+    * [Custom OS Image Creation with Packer](#custom-os-image-creation-with-packer)
+    * [Provided Images](#provided-images)
+* [Hello World Verification](#hello-world-verification)
+* [Performance Benchmarks](#performance-benchmarks)
+    * [RCCL & Model Inference Performance](#rccl--model-inference-performance)
+* [OKE GPU Getting Started](#oke-gpu-getting-started)
+* [Troubleshooting](#troubleshooting)
+* [Further Reading & Support](#further-reading--support)
 
 # Hardware Specifications
 
@@ -56,7 +38,15 @@ See the [OCI Compute Shapes Docs](https://docs.oracle.com/en-us/iaas/Content/Com
 
 ## Recommended Software Version
 
-**Section Needs Updating**
+• ROCm Version: 7.1+\
+• RCCL: 2.26.6\
+• OFED: 25.07-0.9.7\
+• Oracle Cloud Agent 1.54.0+\
+• HPCX 2.22+
+
+### Recommended FW (Managed by OCI)
+
+• BKC 25.15.04+ 
 
 ## Custom OS image Creation with Packer
 
@@ -72,6 +62,8 @@ It is recommended to use Oracle-provided or organizationally-approved images for
 | OCI GPU AI Image with Ubuntu Linux 24.04  | `Ubuntu-24/Canonical-Ubuntu-24.04-DOCA-OFED-3.0.0-AMD-ROCM-710.pkr.hcl`| [PAR Link](https://objectstorage.us-chicago-1.oraclecloud.com/p/Bv7qO-ALCgpnHE-0whrjmfMIENDz8DFRf30urxyVZ2hjSRQyTyqKwdXV316QxSWy/n/iduyx1qnmway/b/oci-hpc-images/o/Canonical-Ubuntu-24.04-2025.10.31-0-OCA-DOCA-OFED-3.1.0-AMD-ROCM-710-2025.12.05) | ROCM 7.1.0, RCCL 2.26.6, OFED: 28.40.1202, Oracle Cloud Agent 1.54.0+, HPCX 2.22+ | ![Build](/media/icons/build-passing.svg) ![Build](/media/icons/dependencies.svg) 
 | OCI GPU AI Image with Ubuntu Linux 22.04  | `Ubuntu-22/Canonical-Ubuntu-22.04-DOCA-OFED-3.0.0-AMD-ROCM-710.pkr.hcl`| [PAR Link](https://objectstorage.us-chicago-1.oraclecloud.com/p/ADstfRticRqOIwBHKo9HoFOheSC9mzHTx2mdx_j8e-aB9tGdPAVGsm1jzVEfs27G/n/iduyx1qnmway/b/oci-hpc-images/o/Canonical-Ubuntu-22.04-2025.10.31-0-OCA-DOCA-OFED-3.1.0-AMD-ROCM-710-2025.12.05) |  ROCM 7.1, OFED 24.10-1.1.4.0, OCA 1.52, HPC-X 2.23 | ![Build](/media/icons/build-passing.svg) ![Build](/media/icons/dependencies.svg) 
 | OCI GPU AI Image with Ubuntu Linux 22.04  | `Ubuntu-22/Canonical-Ubuntu-24.04-DOCA-OFED-3.0.0-AMD-ROCM-641.pkr.hcl`| [PAR Link](https://objectstorage.us-chicago-1.oraclecloud.com/p/HeINbvoAL3xKI_rvUyMdnW_j-CCqCsqsUZ76arKCkW-4iMeQRAt_Wq_5HDZlEBSs/n/iduyx1qnmway/b/oci-hpc-images/o/Canonical-Ubuntu-22.04-2025.10.31-0-DOCA-OFED-3.0.0-AMD-ROCM-641-2025.12.05) |  ROCM 6.4, OFED 24.10-1.1.4.0, OCA 1.52, HPC-X 2.23 | ![Build](/media/icons/build-passing.svg) ![Build](/media/icons/dependencies.svg) 
+| OCI GPU AI Image with Ubuntu Linux 22.04  | `Ubuntu-22/Canonical-Ubuntu-24.04-DOCA-OFED-3.2.1-AMD-ROCM-643.pkr.hcl`| [PAR Link](https://objectstorage.ca-montreal-1.oraclecloud.com/p/AIo4CP0P_DlUelDlsWgGPWmY6FcBQzJWmmFyGKdY0epkh87a9Q3ndvFYycjIxTQ9/n/idxzjcdglx2s/b/images/o/Canonical-Ubuntu-22.04-2026.02.28-0-DOCA-OFED-3.2.1-AMD-ROCM-643-2026.03.13-0) |  ROCM 6.43, OFED 3.2.1, OCA 1.57.0, HPC-X 2.23 | ![Build](/media/icons/build-passing.svg) ![Build](/media/icons/dependencies.svg) 
+| OCI GPU AI Image with Ubuntu Linux 22.04  | `Ubuntu-22/Canonical-Ubuntu-24.04-DOCA-OFED-3.2.1-AMD-ROCM-72.pkr.hcl`| [PAR Link](https://objectstorage.ca-montreal-1.oraclecloud.com/p/AIo4CP0P_DlUelDlsWgGPWmY6FcBQzJWmmFyGKdY0epkh87a9Q3ndvFYycjIxTQ9/n/idxzjcdglx2s/b/images/o/Canonical-Ubuntu-22.04-2026.02.28-0-DOCA-OFED-3.2.1-AMD-ROCM-72-2026.03.13-0) |  ROCM 7.2, OFED 3.2.1, OCA 1.57.0, HPC-X 2.23 | ![Build](/media/icons/build-passing.svg) ![Build](/media/icons/dependencies.svg) 
 
 # Hello World Verification
 
@@ -310,7 +302,12 @@ AMDSMI Tool: 24.6.2+2b02a07 | AMDSMI Library version: 24.6.2.0 | ROCm version: 7
 
 Here you can find suggested troubleshooting methods.
 
-**1. Confirm Hardware & Drivers**
+* [Confirm Hardware & Drivers](#confirm-hardware--drivers)
+* [Health Checks](#health-checks)
+* [ROCM AGFHC](#rocm-agfhc)
+* [OCI GPU Scanner](#oci-gpu-scanner)
+
+## Confirm Hardware & Drivers
 ```sh
 amd-smi
 ```
@@ -350,7 +347,7 @@ node   0   1
   0:  10  32 
   1:  32  10 
 ```
-**2. Health Checks**
+## Health Checks
 
 The [AMDs ROCm Validation Suite (RVS)](https://rocm.docs.amd.com/projects/ROCmValidationSuite/en/latest/) is a system validation and diagnostics tool for monitoring, stress testing, detecting, and troubleshooting issues that affect the functionality and performance of AMD GPUs operating in a high-performance/AI/ML computing environment. RVS is enabled using the ROCm software stack on a compatible software and hardware platform and is part of the OS images from OCI. 
 
@@ -401,10 +398,10 @@ Result
 [RESULT] [ 82145.821495] [module_terminate] PCIe monitoring ended after wait duration.
 ```
 
-**3. ROCM AGFHC**
+## ROCM AGFHC
 The recommended tool for identifying additional issues is ROCM AGFHC (AMD GPU Field Health Check). This tool is only made available to NDA OCI customers. Reach out to us to us to get access to this tool in container format. [More about AGHFC.](https://instinct.docs.amd.com/projects/gpu-operator/en/latest/test/agfhc.html).
 
-**4. OCI GPU Scanner**
+## OCI GPU Scanner
 We recommend you use OCI GPU Scanner to manage the OKE cluster health and GPU health. GPU scanner also provies continu=ious health check and auto-remidiation. [OCI GPU Scanner - Cluster Health Management Solution](https://github.com/oracle-quickstart/oci-gpu-scanner)
 
 # Further Reading & Support
