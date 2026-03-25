@@ -282,7 +282,7 @@ python3 /app/vllm/benchmarks/benchmark_serving.py --host localhost --port 8000 \
     --percentile-metrics ttft,tpot,itl,e2el \
     --ignore-eos
 ```
-#### Results
+#### Example Results
 ```sh
 ============ Serving Benchmark Result ============
 Successful requests:                     32        
@@ -311,6 +311,23 @@ Median E2EL (ms):                        3591.23
 P99 E2EL (ms):                           4080.27   
 ==================================================
 ```
+
+## Sweep Results
+
+| Input Tokens | Output Tokens | Output Throughput (tok/s) | Total Throughput (tok/s) |
+|-------------|--------------|--------------------------|-------------------------|
+| 4,096 | 4,096 | 964.73 | 1,929.46 |
+| 4,096 | 32,768 | 1,145.46 | 1,288.65 |
+| 4,096 | 65,536 | 1,149.56 | 1,221.41 |
+| 16,384 | 131,072 | 1,145.09 | 1,288.22 |
+| 65,381 | 4,096 | 984.90 | 16,706.06 |
+| 65,381 | 65,536 | 1,135.33 | 2,267.98 |
+| 65,381 | 131,072 | 1,139.77 | 1,708.31 |
+| 130,970 | 65,536 | 1,123.75 | 3,369.50 |
+| 262,135 | 65,536 | 1,102.41 | 5,511.91 |
+| 65,381 | 262,144 | 1,141.67 | 1,426.41 |
+
+---
 
 # OKE GPU Getting Started
 
