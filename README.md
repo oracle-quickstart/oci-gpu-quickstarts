@@ -1,7 +1,4 @@
-<div align="center">
-
-# OCI GPU Offerings Quickstars
-</div>
+# OCI GPU Quickstars
 
 ## Oracle Cloud Infrastructure GPU Onboarding Guides
 
@@ -50,9 +47,6 @@ This repository hosts onboarding content for Oracle Cloud Infrastructure GPU off
         /k8s
             [Example Kubernetes YAMLs]
 ```
-
----
-
 ### Questions
 
 Reach out to [amar.gowda@oracle.com](mailto:amar.gowda@oracle.com)
