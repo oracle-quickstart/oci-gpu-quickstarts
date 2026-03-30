@@ -28,11 +28,11 @@ Within each node, all 8 MI355X GPUs are connected via AMD XGMI, enabling a symme
 
 # Hardware Specifications
 
-Note: Pollara nodes may use a different system image than ConnectX-based nodes. Align to the [OCI-provided image/BKC](#provided-images) for the rack.
+Note: Pollara nodes may use a different system image than ConnectX-based nodes. Align to the [OCI-provided image](#provided-images) for the rack.
 
 | Shape Name        | GPU Model     | GPUs/Node | GPU Memory (GB/GPU) | GPU Memory Total |             CPU           | # of CPUs | System Memory | Local Storage	 | Host NIC | RDMA (ROCe) NICs |
 |-------------------|---------------|-----------|------------|----------------- |---------------------------|-----------|---------------|----------------|----------|-----------|
-| BM.GPU.MI355x.8| AMD MI355X    |   8       | 288 | 2.3 TB  | AMD EPYC 9575F (x2)| 64 (128 Cores) | 3TB	| 8 x 7.68TB NVMe  | NVIDIA CX-7 2x200GBps = 400GBps| AMD Pensando™ Pollara 400 AI NIC, 8x400Gb/s Ethernet = 3.2 Tb/s
+| BM.GPU.MI355x.v0.8| AMD MI355X    |   8       | 288 | 2.3 TB  | AMD EPYC 9575F (x2)| 64 (128 Cores) | 3TB	| 8 x 7.68TB NVMe  | NVIDIA CX-7 2x200GBps = 400GBps| AMD Pensando™ Pollara 400 AI NIC, 8x400Gb/s Ethernet = 3.2 Tb/s
 
 See the [OCI Compute Shapes Docs](https://docs.oracle.com/en-us/iaas/Content/Compute/References/computeshapes.htm) for up-to-date details.
 
@@ -44,7 +44,7 @@ See the [OCI Compute Shapes Docs](https://docs.oracle.com/en-us/iaas/Content/Com
 
 ## Recommended Software Version
 
-• ROCm: 7.0.2\
+• ROCm: 7.2.0+\
 • RCCL: 2.26.6\
 • Oracle Cloud Agent: 1.55.0+\
 • Networking stack note (Pollara)\
@@ -52,9 +52,6 @@ See the [OCI Compute Shapes Docs](https://docs.oracle.com/en-us/iaas/Content/Com
 • OpenMPI: 4.1.6, 5.0.8\
 • amd-anp (amd ainic network plugin designed to enhance performance for RCCL collective communications library)\
 • amd-argus
-
-### Recommended Firmware (Managed by OCI)
-• BKC: 25.17.07 (or newer, as provided/approved by OCI for the cluster)
 
 ## Custom OS image Creation with Packer
 
@@ -66,9 +63,9 @@ It is recommended to use Oracle-provided or organizationally-approved images for
 
 | OS Version        | Image Packer Build Details       | OCI Platform Image Link                                                                        | Driver Versions | Build & Dependency Status | 
 |-------------------|-------------------------------|------------------------------------------------------------------------------------------------------------|--------------|--------------------------|
-| OCI GPU AI Image with Ubuntu Linux 22.04  | `Canonical-Ubuntu-22.04-DOCA-OFED-3.2.1-AMD-ROCM-72.pkr.hcl`| [PAR Link](https://objectstorage.us-saltlake-2.oraclecloud.com/p/02QYYf_pFsZlBzMQi5-kp3jTYTJiX4RnkOfgpqTxlvwpO7pCie2bfYrRCr5KD_ll/n/hpctraininglab/b/Sudhir-test-bucket/o/Canonical-Ubuntu-22.04-Kernel-5.15-OFED-5.9-AMD-ROCM-702_POLLARA-OPENMPI-4.1.6) | ROCM 7.0.2, RCCL 2.26.6, OFED 5.9, Oracle Cloud Agent 1.57.0 | ![Build](/media/icons/build-passing.svg) ![Build](/media/icons/dependencies.svg) |
-| OCI GPU AI Image with Ubuntu Linux 24.04.4 LTS | `Canonical-Ubuntu-24.04-6.8-DOCA-OFED-3.2.1-AMD-ROCM-72.pkr.hcl` | [PAR Link](https://objectstorage.ap-kulai-1.oraclecloud.com/p/YeKLuiqsQn6PHmMDL3aqKMPYeXBmkTFuAPn5v3m3Xs5vHUPoOdJdE-tC5ezPBRbs/n/hpctraininglab/b/Sudhir-Bucket/o/Canonical-Ubuntu-24.04-2026.02.28-0-removed-rocm-from-mpi-mofed_2410_1140-AMD-ROCM-702-2026.03.13-0) |  MLNX OFED LINUX-24.10-1.1.4.0, ROCm 7.0.2, Pollara NIC Firmware 1.117.5-a-56, OpenMPI 5.0.8, OCA: 1.57.0-2248 |  ![Build](/media/icons/build-passing.svg) ![Build](/media/icons/dependencies.svg) |
-| OCI GPU AI Image with Ubuntu Linux 24.04.4 LTS | `Canonical-Ubuntu-24.04-6.8-DOCA-OFED-3.2.1-AMD-ROCM-72.pkr.hcl` | [PAR Link](https://objectstorage.ap-kulai-1.oraclecloud.com/p/r7NmOiphWU9Pm9G7yBSkGIYRT5EXCjSNL2BYqso7R-s2zYBoTPmdwn3uyJ-pCvGb/n/hpctraininglab/b/Sudhir-Bucket/o/Canonical-Ubuntu-24.04-2026.02.28-0-MOFED-2410_1140-AMD-ROCM-72-2026.03.13-0) | MLNX OFED LINUX-24.10-1.1.4.0, ROCm 7.2, Pollara NIC Firmware: 1.117.5-a-56, OpenMPI 5.0.8, OCA: 1.57.0-2248 | ![Build](/media/icons/build-passing.svg) ![Build](/media/icons/dependencies.svg) | 
+| OCI GPU AI Image with Ubuntu Linux 22.04  | To be updated | Under construction — image link will be provided in a future update. | ROCM 7.0.2, RCCL 2.26.6, OFED 5.9, Oracle Cloud Agent 1.57.0 | ![Build](/media/icons/build-passing.svg) ![Build](/media/icons/dependencies.svg) |
+| OCI GPU AI Image with Ubuntu Linux 24.04.4 LTS | To be updated | Under construction — image link will be provided in a future update. |  MLNX OFED LINUX-24.10-1.1.4.0, ROCm 7.0.2, Pollara NIC Firmware 1.117.5-a-56, OpenMPI 5.0.8, OCA: 1.57.0-2248 |  ![Build](/media/icons/build-passing.svg) ![Build](/media/icons/dependencies.svg) |
+| OCI GPU AI Image with Ubuntu Linux 24.04.4 LTS | To be updated | Under construction — image link will be provided in a future update. | MLNX OFED LINUX-24.10-1.1.4.0, ROCm 7.2, Pollara NIC Firmware: 1.117.5-a-56, OpenMPI 5.0.8, OCA: 1.57.0-2248 | ![Build](/media/icons/build-passing.svg) ![Build](/media/icons/dependencies.svg) | 
 
 ***Note that ROCM 7.2 is experimental and not currently recommended for MI355x-Pollara**
 
@@ -93,6 +90,8 @@ docker run -it \
 # Performance Benchmarks
 
 The section below has the base line numbers achieved and how to reproduce this with MI355X. When you run the same there is typically a variance of 5%-8% which is acceptable. 
+
+For guidance on installing and running RCCL benchmarks, see the [AMD RCCL documentation](https://rocm.docs.amd.com/projects/rccl).
 
 ## RCCL & Model Inference Performance
 
@@ -604,82 +603,8 @@ Port : 04908139-90d8-4242-4242-000011010000 (eth1/1)
     TX pause                                 : enabled
     RX pause                                 : enabled
     Auto negotiation                         : enabled
-  Status:
-    Physical port                            : 1
-    Operational status                       : UP
-    Link FSM state                           : UP
-    FEC type                                 : RS
-    Cable type                               : Fiber
-    Number of lanes                          : 4
-    speed                                    : 400G
-    Auto negotiation                         : disabled
-    Number of link down events               : 1
-    MAC ID                                   : 0
-    MAC channel                              : 0
-    MAC address                              : 04:90:81:39:90:d8
-    Transceiver type                         : QSFP_CMIS
-    Transceiver state                        : SPROM-READ
-    Transceiver PID                          : QSFP-400G-FR4
-    Transceiver temperature (in C)           : 56
-    Transceiver warning temperature (in C)   : 73
-    Transceiver alarm temperature (in C)     : 78
 -------------------------------------------------------------------------------------
 
-
-sudo nicctl show firmware
-
-NIC : 42424650-4c32-3532-3430-353433000000 (0000:05:00.0)
-
-CPLD : 3.18 (primary)
-Bootloader1-0 : 7
-Pentrust firmware-0 : 8
-Firmware-B : 1.117.5-a-56
-Device config-B : device_config/1.0.0
--------------------------------------------------------------------------------------
-sudo nicctl show card
-
----------------------------------------------------------------------------------------------
-Id PCIe BDF ASIC F/W partition Serial number 
----------------------------------------------------------------------------------------------
-42424650-4c32-3532-3430-353433000000 0000:05:00.0 salina B FPL25240543 
-42424650-4c32-3532-3430-333942000000 0000:1e:00.0 salina B FPL2524039B 
-42424650-4c32-3532-3430-324242000000 0000:55:00.0 salina B FPL252402BB 
-42424650-4c32-3532-3430-413237000000 0000:6d:00.0 salina B FPL25240A27 
-42424650-4c32-3532-3430-363435000000 0000:86:00.0 salina B FPL25240645 
-42424650-4c32-3532-3430-354543000000 0000:9f:00.0 salina B FPL252405EC 
-42424650-4c32-3532-3430-353434000000 0000:d4:00.0 salina B FPL25240544 
-42424650-4c32-3532-3430-374143000000 0000:ec:00.0 salina B FPL252407AC 
-
-ubuntu@GPU-900:~$ sudo nicctl show card -c 42424650-4c32-3532-3430-353433000000
-
----------------------------------------------------------------------------------------------
-Id PCIe BDF ASIC F/W partition Serial number 
----------------------------------------------------------------------------------------------
-42424650-4c32-3532-3430-353433000000 0000:05:00.0 salina B FPL25240543 
-
-sudo nicctl show card -c 42424650-4c32-3532-3430-353433000000 -d
-
-Id : 42424650-4c32-3532-3430-353433000000
-PCIe BDF : 0000:05:00.0
-Resource BDF : 0000:07:00.1
-IPC BDF : 0000:07:00.0
-Ethernet controller BDF : 0000:08:00.0
-FRU MAC address : 04:90:81:39:90:d8
-Product name : POLLARA 1x400G QSFP112
-SKU : POLLARA-1Q400P-O
-Serial number : FPL25240543
-Hardware revision : 00D
-Manufacturing date : 2025-Jun-18
-Vendor name : AMD
-ASIC : salina
-P4 pipeline : rudra
-P4 program : pulsar
-Firmware version : 1.117.5-a-56
-Current firmware partition : B
-Next boot firmware partition : B
-Generation id : babb220d-4a0f-ea54-38c7-7106e566136b
-Reset reason : Power reset
-------------------------------------------------------------------------------------- 
 ```
 ## RDMA Link
 To see the interfaces run the command “rdma link”. The front-end network is mlx5_0 (eth0). The RoCE RDMA interfaces are the ionic* interfaces. The state should show up as “ACTIVE” and the physical_state as “LINK_UP”. 
