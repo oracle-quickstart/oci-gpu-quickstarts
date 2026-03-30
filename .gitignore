@@ -1,3 +1,6 @@
+# Claude Code skills/commands — internal use only
+.claude/
+
 # Local .terraform directories
 **/.terraform/*
 
