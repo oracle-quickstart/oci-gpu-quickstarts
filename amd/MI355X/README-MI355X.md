@@ -44,10 +44,6 @@ See the [OCI Compute Shapes Docs](https://docs.oracle.com/en-us/iaas/Content/Com
 • Oracle Cloud Agent 1.54.0+\
 • HPCX 2.22+
 
-### Recommended FW (Managed by OCI)
-
-• BKC 25.15.04+ 
-
 ## Custom OS image Creation with Packer
 
 To build your images using packer clone the OCI HPC Images repo and run the commands found there [OCI HPC Images GitHub Repo](https://github.com/oracle-quickstart/oci-hpc-images/blob/main/README.md).
@@ -81,8 +77,6 @@ docker run -it \
     --shm-size 8G \
     rocm/pytorch:latest
 ```
-
-
 # Performance Benchmarks
 
 The section below has the base line numbers achieved and how to reproduce this with MI355X. When you run the same there is typically a variance of 5%-8% which is acceptable. 
@@ -294,7 +288,7 @@ Device  Node  IDs              Temp        Power     Partitions 
 ============================================================================================================================						
 =================================================== End of ROCm SMI Log ====================================================	
 
-AMDSMI Tool: 24.6.2+2b02a07 | AMDSMI Library version: 24.6.2.0 | ROCm version: 7.1.2
+AMD SMI Tool: 24.6.2+2b02a07 | AMD SMI Library version: 24.6.2.0 | ROCm version: 7.1.2
 
 ```
 
