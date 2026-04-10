@@ -381,6 +381,14 @@ Results:
 # OKE GPU Getting Started
 Information on getting up and running on OKE can be found [here](https://github.com/oracle-quickstart/oci-hpc-oke).
 
+Useful GB200-specific OKE starting points in `oci-hpc-oke`:
+
+- [GB200 NCCL test manifest](https://github.com/oracle-quickstart/oci-hpc-oke/blob/main/manifests/nccl-tests/kueue/BM.GPU.GB200.4.yaml)
+- [GB200-v2 NCCL test manifest](https://github.com/oracle-quickstart/oci-hpc-oke/blob/main/manifests/nccl-tests/kueue/BM.GPU.GB200-v2.4.yaml)
+- [GB200-v3 NCCL test manifest](https://github.com/oracle-quickstart/oci-hpc-oke/blob/main/manifests/nccl-tests/kueue/BM.GPU.GB200-v3.4.yaml)
+- [Running active health checks on OKE](https://github.com/oracle-quickstart/oci-hpc-oke/blob/main/docs/running-active-health-checks.md)
+- [Running ib_write_bw on OKE](https://github.com/oracle-quickstart/oci-hpc-oke/blob/main/docs/running-ib-write-bw-test.md)
+
 # Troubleshooting
 
 Here you can find suggested troubleshooting methods.

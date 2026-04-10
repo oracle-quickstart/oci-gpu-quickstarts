@@ -244,6 +244,12 @@ resources:
 5. Verify with Hello World CUDA container pod.
 See detailed instructions in OKE Onboarding Guide .
 
+Useful B200-specific OKE starting points in `oci-hpc-oke`:
+
+- [B200 NCCL test manifest](https://github.com/oracle-quickstart/oci-hpc-oke/blob/main/manifests/nccl-tests/kueue/BM.GPU.B200.8.yaml)
+- [Running active health checks on OKE](https://github.com/oracle-quickstart/oci-hpc-oke/blob/main/docs/running-active-health-checks.md)
+- [Running ib_write_bw on OKE](https://github.com/oracle-quickstart/oci-hpc-oke/blob/main/docs/running-ib-write-bw-test.md)
+
 # Troubleshooting
 Here you can find suggested troubleshooting methods.
 

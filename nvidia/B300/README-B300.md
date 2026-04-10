@@ -201,6 +201,12 @@ Model-training benchmark results collected for this shape:
 
 Information on getting up and running on OKE can be found [here](https://github.com/oracle-quickstart/oci-hpc-oke).
 
+Useful B300-specific OKE starting points in `oci-hpc-oke`:
+
+- [B300 NCCL test manifest](https://github.com/oracle-quickstart/oci-hpc-oke/blob/main/manifests/nccl-tests/kueue/BM.GPU.B300.8.yaml)
+- [Running active health checks on OKE](https://github.com/oracle-quickstart/oci-hpc-oke/blob/main/docs/running-active-health-checks.md)
+- [Running ib_write_bw on OKE](https://github.com/oracle-quickstart/oci-hpc-oke/blob/main/docs/running-ib-write-bw-test.md)
+
 # Troubleshooting
 
 This guide includes a broad health-check set covering GPU visibility, firmware, NUMA topology, RDMA connectivity, storage, and intra-node bandwidth checks.

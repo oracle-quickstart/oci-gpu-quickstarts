@@ -420,6 +420,12 @@ NCCL version 2.28.7+cuda13.0
 # OKE GPU Getting Started
 Information on getting up and running on OKE can be found [here](https://github.com/oracle-quickstart/oci-hpc-oke).
 
+Useful GB300-specific OKE starting points in `oci-hpc-oke`:
+
+- [GB300 NCCL test manifest](https://github.com/oracle-quickstart/oci-hpc-oke/blob/main/manifests/nccl-tests/kueue/BM.GPU.GB300.4.yaml)
+- [Running active health checks on OKE](https://github.com/oracle-quickstart/oci-hpc-oke/blob/main/docs/running-active-health-checks.md)
+- [Running ib_write_bw on OKE](https://github.com/oracle-quickstart/oci-hpc-oke/blob/main/docs/running-ib-write-bw-test.md)
+
 # Troubleshooting
 
 Here you can find suggested troubleshooting methods.
